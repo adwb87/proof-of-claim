@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// NextAuth Models
+// ============================================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+  cases    Case[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================================
+// Case Tracking Models
+// ============================================================
+
+model Case {
+  id        String     @id @default(cuid())
+  userId    String
+  status    CaseStatus @default(AWAITING_RESPONSE)
+  category  String     // DemandCategory (energy, water, etc.)
+  entityName String
+  entityAddress String?
+  referenceNumber String?
+  recommendedDocument String // DocumentTemplateId
+  answers   Json       // Record of question answers
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documents  SentDocument[]
+  responses  CaseResponse[]
+  timeline   TimelineEvent[]
+  reminders  Reminder[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+enum CaseStatus {
+  AWAITING_RESPONSE
+  RESPONSE_RECEIVED
+  ACTION_REQUIRED
+  CLOSED_DEFAULT
+  RESOLVED
+  ESCALATED
+}
+
+model SentDocument {
+  id         String   @id @default(cuid())
+  caseId     String
+  templateId String   // DocumentTemplateId
+  sentDate   DateTime @default(now())
+  sentMethod String?  // post, email, both
+  notes      String?
+
+  case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@index([caseId])
+}
+
+model CaseResponse {
+  id           String   @id @default(cuid())
+  caseId       String
+  receivedDate DateTime @default(now())
+  responseType String   // full_compliance, partial, refusal, threat, no_response
+  summary      String
+  nextAction   String?
+
+  case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@index([caseId])
+}
+
+model TimelineEvent {
+  id        String   @id @default(cuid())
+  caseId    String
+  eventType String   // document_sent, response_received, status_changed, reminder_set, note_added
+  title     String
+  detail    String?
+  createdAt DateTime @default(now())
+
+  case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@index([caseId])
+  @@index([createdAt])
+}
+
+model Reminder {
+  id       String   @id @default(cuid())
+  caseId   String
+  dueDate  DateTime
+  title    String
+  sent     Boolean  @default(false)
+  sentAt   DateTime?
+
+  case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@index([caseId])
+  @@index([dueDate])
+}

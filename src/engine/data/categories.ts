@@ -1,0 +1,81 @@
+import { CategoryInfo } from "@/engine/types";
+
+export const CATEGORIES: CategoryInfo[] = [
+  {
+    id: "energy",
+    label: "Energy Bills",
+    description: "Gas & electricity demands",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    color: "#d97706",
+  },
+  {
+    id: "water",
+    label: "Water Bills",
+    description: "Water company demands",
+    icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93z",
+    color: "#0ea5e9",
+  },
+  {
+    id: "council-tax",
+    label: "Council Tax",
+    description: "Council tax bills and liability orders",
+    icon: "M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z",
+    color: "#7c3aed",
+  },
+  {
+    id: "private-parking",
+    label: "Private Parking",
+    description: "Private parking charge notices",
+    icon: "M18 4h-1V3c0-.55-.45-1-1-1H8c-.55 0-1 .45-1 1v1H6c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-6 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H9V5h6v4z",
+    color: "#f59e0b",
+  },
+  {
+    id: "council-parking",
+    label: "Council Parking",
+    description: "Council-issued PCNs",
+    icon: "M20 10H4c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h16c.55 0 1-.45 1-1v-8c0-.55-.45-1-1-1zM7 18H5v-2h2v2zm0-4H5v-2h2v2zm4 4H9v-2h2v2zm0-4H9v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zM2 6l2-2h16l2 2H2z",
+    color: "#0d9488",
+  },
+  {
+    id: "speeding",
+    label: "Speeding / NIP",
+    description: "Notice of Intended Prosecution",
+    icon: "M15.5 5H11l5 7-1.5 1.5L9 7v8.5L3.5 21H2l3.5-6L2 9h5.5l3 4.5L12 12l-5-7h8.5L21 2l-5.5 3z",
+    color: "#dc2626",
+  },
+  {
+    id: "tv-licence",
+    label: "TV Licence",
+    description: "TV Licensing demands",
+    icon: "M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z",
+    color: "#6366f1",
+  },
+  {
+    id: "debt-collector",
+    label: "Debt Collectors",
+    description: "Debt collection demands",
+    icon: "M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z",
+    color: "#e11d48",
+  },
+  {
+    id: "bailiff",
+    label: "Bailiffs",
+    description: "Bailiff and enforcement demands",
+    icon: "M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z",
+    color: "#1e293b",
+  },
+  {
+    id: "hmrc",
+    label: "HMRC",
+    description: "HMRC tax demands",
+    icon: "M4 10h3v7H4v-7zm6-4h3v11h-3V6zm6 8h3v3h-3v-3zM2 20h20v2H2v-2z",
+    color: "#059669",
+  },
+  {
+    id: "other",
+    label: "Other Demands",
+    description: "Any other demand for money or compliance",
+    icon: "M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z",
+    color: "#64748b",
+  },
+];
